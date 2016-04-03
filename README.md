@@ -85,7 +85,7 @@ dismiss dialog fragment with `safeDismiss()`, do fragment transaction with
 ### Create your own base components
 If your base components must extends other base components, you can make your base component
 implement the `TransactionCommitter` interface, and mimic the behaviours of
-[safely base components]()
+[safely base components](https://github.com/Piasy/SafelyAndroid/tree/master/safelyandroid/src/main/java/com/github/piasy/safelyandroid/component)
 provided by us, then you can also build safely Android app now!
 
 ## Dev tips
