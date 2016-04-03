@@ -262,10 +262,9 @@ public final class StartActivityDelegate {
 
     /**
      * this method is from the official guide:
-     * http://developer.android.com/training/basics/intents/sending.html#Verify
+     * http://developer.android.com/training/basics/intents/sending.html#StartActivity
      * */
     private static boolean isIntentSafe(PackageManager packageManager, Intent intent) {
-        return !packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
-                .isEmpty();
+        return !packageManager.queryIntentActivities(intent, 0).isEmpty();
     }
 }
