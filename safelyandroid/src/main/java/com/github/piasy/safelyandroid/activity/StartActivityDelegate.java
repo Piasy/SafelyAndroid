@@ -27,6 +27,7 @@ package com.github.piasy.safelyandroid.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -66,7 +67,7 @@ public final class StartActivityDelegate {
      */
     public static boolean startActivitySafely(@NonNull android.support.v4.app.Fragment fragment,
             @NonNull Intent intent, Bundle options) {
-        if (intent.resolveActivity(fragment.getActivity().getPackageManager()) != null) {
+        if (isIntentSafe(fragment.getActivity().getPackageManager(), intent)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 fragment.startActivity(intent, options);
             } else {
@@ -105,7 +106,7 @@ public final class StartActivityDelegate {
     public static boolean startActivityForResultSafely(
             @NonNull android.support.v4.app.Fragment fragment, @NonNull Intent intent,
             int requestCode, Bundle options) {
-        if (intent.resolveActivity(fragment.getActivity().getPackageManager()) != null) {
+        if (isIntentSafe(fragment.getActivity().getPackageManager(), intent)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 fragment.startActivityForResult(intent, requestCode, options);
             } else {
@@ -140,7 +141,7 @@ public final class StartActivityDelegate {
      */
     public static boolean startActivitySafely(@NonNull android.app.Fragment fragment,
             @NonNull Intent intent, Bundle options) {
-        if (intent.resolveActivity(fragment.getActivity().getPackageManager()) != null) {
+        if (isIntentSafe(fragment.getActivity().getPackageManager(), intent)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 fragment.startActivity(intent, options);
             } else {
@@ -177,7 +178,7 @@ public final class StartActivityDelegate {
      */
     public static boolean startActivityForResultSafely(@NonNull android.app.Fragment fragment,
             @NonNull Intent intent, int requestCode, Bundle options) {
-        if (intent.resolveActivity(fragment.getActivity().getPackageManager()) != null) {
+        if (isIntentSafe(fragment.getActivity().getPackageManager(), intent)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 fragment.startActivityForResult(intent, requestCode, options);
             } else {
@@ -211,7 +212,7 @@ public final class StartActivityDelegate {
      */
     public static boolean startActivitySafely(@NonNull Context context, @NonNull Intent intent,
             Bundle options) {
-        if (intent.resolveActivity(context.getPackageManager()) != null) {
+        if (isIntentSafe(context.getPackageManager(), intent)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 context.startActivity(intent, options);
             } else {
@@ -248,7 +249,7 @@ public final class StartActivityDelegate {
      */
     public static boolean startActivityForResultSafely(@NonNull Activity activity,
             @NonNull Intent intent, int requestCode, Bundle options) {
-        if (intent.resolveActivity(activity.getPackageManager()) != null) {
+        if (isIntentSafe(activity.getPackageManager(), intent)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                 activity.startActivityForResult(intent, requestCode, options);
             } else {
@@ -257,5 +258,14 @@ public final class StartActivityDelegate {
             return true;
         }
         return false;
+    }
+
+    /**
+     * this method is from the official guide:
+     * http://developer.android.com/training/basics/intents/sending.html#Verify
+     * */
+    private static boolean isIntentSafe(PackageManager packageManager, Intent intent) {
+        return !packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+                .isEmpty();
     }
 }
