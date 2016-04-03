@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="200dp"
+              android:layout_height="100dp"
+              android:layout_gravity="center"
+              android:orientation="vertical"
+              android:background="@android:color/holo_red_light"
+        >
+    <TextView
+            android:id="@+id/mTv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            tools:text="@string/confirm_hint_formatter"
+            />
+</LinearLayout>

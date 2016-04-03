@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SafelyAndroid</string>
+
+    <string name="confirm_hint_formatter" formatted="false">Confirm ? %d s left.</string>
+</resources>
