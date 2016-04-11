@@ -1,5 +1,6 @@
 package com.github.piasy.safelyandroid.component.support;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,12 @@ public class SafelyAppCompatActivity extends AppCompatActivity implements Transa
 
     protected boolean safeCommit(@NonNull FragmentTransaction transaction) {
         return mSupportFragmentTransactionDelegate.safeCommit(this, transaction);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mIsResumed = true;
     }
 
     @Override
