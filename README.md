@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.piasy:safelyandroid:1.0.3'
+    compile 'com.github.piasy:safelyandroid:1.0.4'
 }
 ```
 

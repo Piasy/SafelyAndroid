@@ -2,8 +2,10 @@ package com.github.piasy.safelyandroid.component;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import com.github.piasy.safelyandroid.activity.StartActivityDelegate;
 import com.github.piasy.safelyandroid.fragment.FragmentTransactionDelegate;
 import com.github.piasy.safelyandroid.fragment.TransactionCommitter;
 
@@ -18,6 +20,10 @@ public class SafelyActivity extends Activity implements TransactionCommitter {
 
     protected boolean safeCommit(@NonNull FragmentTransaction transaction) {
         return mFragmentTransactionDelegate.safeCommit(this, transaction);
+    }
+
+    protected boolean startActivitySafely(final Intent intent) {
+        return StartActivityDelegate.startActivitySafely(this, intent);
     }
 
     @Override
