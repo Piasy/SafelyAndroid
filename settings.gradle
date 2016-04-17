@@ -1,1 +1,1 @@
-include ':example', ':safelyandroid'
+include ':example', ':safelyandroid', ':safelyandroid-detector', ':safelyandroid-lint'

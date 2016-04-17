@@ -1,4 +1,6 @@
 # SafelyAndroid
+[ ![Download](https://api.bintray.com/packages/piasy/maven/SafelyAndroid/images/download.svg) ](https://bintray.com/piasy/maven/SafelyAndroid/_latestVersion)
+
 Build safely Android app, no more Activity not found error and Activity state loss error!
 
 ## Pause-safe fragment transaction
@@ -13,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.piasy:safelyandroid:1.0.4'
+    compile 'com.github.piasy:safelyandroid:1.1.0'
 }
 ```
 
@@ -87,6 +89,27 @@ If your base components must extends other base components, you can make your ba
 implement the `TransactionCommitter` interface, and mimic the behaviours of
 [safely base components](https://github.com/Piasy/SafelyAndroid/tree/master/safelyandroid/src/main/java/com/github/piasy/safelyandroid/component)
 provided by us, then you can also build safely Android app now!
+
+## Lint check
+When using `safeCommit`, lint will warn "Missing `commit()` calls", you could disable it.
+
+We provide a custom lint rule, to check the "unsafe `dismiss()` call" of dialog fragment.
+
+![safely-android-demo.gif](art/safely-android-lint.png)
+
+Just adding this dependency in your module's `build.gradle`:
+
+```gradle
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'com.github.piasy:safelyandroid-lint:1.1.0'
+}
+```
+
+The suppress of "Missing `commit()` calls" and "unsafe `commit()` call" lint rules may not be added in the long future. :(
 
 ## Dev tips
 +  You need create an empty file named `bintray.properties` under root project dir, which is used for uploading artifact to bintray.

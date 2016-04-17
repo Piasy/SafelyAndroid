@@ -1,6 +1,8 @@
 package com.github.piasy.safelyandroid.example;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.piasy.safelyandroid.component.support.SafelyAppCompatActivity;
 import java.util.concurrent.TimeUnit;
 import rx.Observable;
@@ -25,6 +27,19 @@ public class MainActivity extends SafelyAppCompatActivity {
                                 .add(R.id.mBody, new BodyFragment(), "BodyFragment")
                                 .add(R.id.mFooter, new FooterFragment(), "FooterFragment"));
                     }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        throwable.printStackTrace();
+                        FragmentTransaction transaction =
+                                getSupportFragmentManager().beginTransaction();
+                        transaction.add(R.id.mHeader, new HeaderFragment(), "HeaderFragment")
+                                .add(R.id.mBody, new BodyFragment(), "BodyFragment")
+                                .add(R.id.mFooter, new FooterFragment(), "FooterFragment").commit();
+                    }
                 });
+
+        MaterialDialog dialog = new MaterialDialog.Builder(this).content("Test for dismiss").show();
+        dialog.dismiss();
     }
 }

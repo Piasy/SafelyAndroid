@@ -24,6 +24,8 @@
 
 package com.github.piasy.safelyandroid.dialogfragment;
 
+import android.annotation.SuppressLint;
+
 /**
  * Created by Piasy{github.com/Piasy} on 4/1/16.
  *
@@ -44,6 +46,7 @@ public class DialogFragmentDismissDelegate {
      * @return {@code true} if the {@link android.app.DialogFragment} will be dismissed when
      * {@link #onResumed(android.app.DialogFragment)} is called
      */
+    @SuppressLint("UnsafeDismiss")
     public boolean safeDismiss(android.app.DialogFragment dialogFragment) {
         if (dialogFragment.isResumed()) {
             dialogFragment.dismiss();
@@ -61,6 +64,7 @@ public class DialogFragmentDismissDelegate {
      * @param dialogFragment the {@link android.app.DialogFragment} resumed
      * @return {@code true} if it is dismissed.
      */
+    @SuppressLint("UnsafeDismiss")
     public boolean onResumed(android.app.DialogFragment dialogFragment) {
         if (mPendingDismiss) {
             dialogFragment.dismiss();

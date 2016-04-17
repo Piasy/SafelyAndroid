@@ -1,0 +1,26 @@
+apply plugin: 'java'
+apply from: "${rootProject.rootDir}/bintray.gradle"
+
+// JDK 1.6 is required to support all versions of Android Studio.
+// See http://tools.android.com/build/studio.
+sourceCompatibility = 1.6
+dependencies {
+    compile 'com.android.tools.lint:lint-api:25.0.0'
+    compile 'com.android.tools.lint:lint-checks:25.0.0'
+}
+
+jar {
+    manifest {
+        attributes("Lint-Registry": "com.github.piasy.safelyandroid.lint.SafelyAndroidRegistry")
+    }
+}
+
+configurations {
+    lintChecks
+}
+
+dependencies {
+    lintChecks files(jar)
+}
+
+defaultTasks 'assemble'

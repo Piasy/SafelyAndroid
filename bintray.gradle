@@ -67,16 +67,22 @@ install {
 }
 
 task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
+    if (project.getPlugins().hasPlugin('com.android.application') ||
+            project.getPlugins().hasPlugin('com.android.library')) {
+        from android.sourceSets.main.java.srcDirs
+    }
     classifier = 'sources'
 }
 
-task javadoc(type: Javadoc) {
-    failOnError = false
-    source = android.sourceSets.main.java.srcDirs
-    android.compileSdkVersion rootProject.ext.androidCompileSdkVersion
-    android.buildToolsVersion rootProject.ext.androidBuildToolsVersion
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+if (project.getPlugins().hasPlugin('com.android.application') ||
+        project.getPlugins().hasPlugin('com.android.library')) {
+    task javadoc(type: Javadoc) {
+        failOnError = false
+        source = android.sourceSets.main.java.srcDirs
+        android.compileSdkVersion rootProject.ext.androidCompileSdkVersion
+        android.buildToolsVersion rootProject.ext.androidBuildToolsVersion
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {

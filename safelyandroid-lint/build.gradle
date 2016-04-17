@@ -1,11 +1,11 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
+apply from: "${rootProject.rootDir}/bintray.gradle"
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
     buildToolsVersion rootProject.ext.androidBuildToolsVersion
 
     defaultConfig {
-        applicationId "com.github.piasy.safelyandroid.example"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.releaseVersionCode
@@ -19,15 +19,25 @@ android {
     }
 }
 
+configurations {
+    lintChecks
+}
+
 dependencies {
-    compile project(":safelyandroid")
-    compile project(":safelyandroid-lint")
+    lintChecks project(path: ':safelyandroid-detector', configuration: "lintChecks")
+}
 
-    compile 'nl.littlerobots.rxlint:rxlint:1.0'
-
-    compile('com.github.afollestad.material-dialogs:core:0.8.5.8@aar') {
-        transitive = true
+task copyLintJar(type: Copy) {
+    from(configurations.lintChecks) {
+        rename {
+            String fileName ->
+                'lint.jar'
+        }
     }
-    compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
+    into 'build/intermediates/lint/'
+}
+
+project.afterEvaluate {
+    def compileLintTask = project.tasks.find { it.name == 'compileLint' }
+    compileLintTask.dependsOn(copyLintJar)
 }

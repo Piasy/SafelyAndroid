@@ -51,7 +51,8 @@ public class ConfirmDialogFragment extends SafelySupportDialogFragment {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        // unsafe dismiss, lint will give error in `Inspection` window
+                        dismiss();
                     }
 
                     @Override
