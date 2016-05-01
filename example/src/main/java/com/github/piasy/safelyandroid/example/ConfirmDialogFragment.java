@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.github.piasy.safelyandroid.component.support.SafelySupportDialogFragment;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +24,7 @@ import rx.android.schedulers.AndroidSchedulers;
  */
 public class ConfirmDialogFragment extends SafelySupportDialogFragment {
 
-    @Bind(R.id.mTv)
+    @BindView(R.id.mTv)
     TextView mTv;
 
     @Nullable

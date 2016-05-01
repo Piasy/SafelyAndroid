@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: "${rootProject.rootDir}/bintray.gradle"
+apply plugin: 'com.kageiit.lintrules'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
@@ -19,25 +20,7 @@ android {
     }
 }
 
-configurations {
-    lintChecks
-}
-
 dependencies {
-    lintChecks project(path: ':safelyandroid-detector', configuration: "lintChecks")
+    lintRules project(':safelyandroid-detector')
 }
 
-task copyLintJar(type: Copy) {
-    from(configurations.lintChecks) {
-        rename {
-            String fileName ->
-                'lint.jar'
-        }
-    }
-    into 'build/intermediates/lint/'
-}
-
-project.afterEvaluate {
-    def compileLintTask = project.tasks.find { it.name == 'compileLint' }
-    compileLintTask.dependsOn(copyLintJar)
-}

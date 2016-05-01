@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.piasy:safelyandroid:1.1.0'
+    compile 'com.github.piasy:safelyandroid:1.1.1'
 }
 ```
 
@@ -105,11 +105,8 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.piasy:safelyandroid-lint:1.1.0'
+    compile 'com.github.piasy:safelyandroid-lint:1.1.1'
 }
 ```
 
 The suppress of "Missing `commit()` calls" and "unsafe `commit()` call" lint rules may not be added in the long future. :(
-
-## Dev tips
-+  You need create an empty file named `bintray.properties` under root project dir, which is used for uploading artifact to bintray.

@@ -15,12 +15,4 @@ jar {
     }
 }
 
-configurations {
-    lintChecks
-}
-
-dependencies {
-    lintChecks files(jar)
-}
-
 defaultTasks 'assemble'
