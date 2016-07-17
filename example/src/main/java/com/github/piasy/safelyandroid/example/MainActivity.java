@@ -1,9 +1,9 @@
 package com.github.piasy.safelyandroid.example;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.github.piasy.safelyandroid.component.support.SafelyAppCompatActivity;
+import com.github.piasy.safelyandroid.fragment.SupportFragmentTransactionBuilder;
 import java.util.concurrent.TimeUnit;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -22,22 +22,27 @@ public class MainActivity extends SafelyAppCompatActivity {
                 .subscribe(new Action1<Long>() {
                     @Override
                     public void call(Long aLong) {
-                        safeCommit(getSupportFragmentManager().beginTransaction()
+                        safeCommit(SupportFragmentTransactionBuilder.transaction(
+                                getSupportFragmentManager())
                                 .add(R.id.mHeader, new HeaderFragment(), "HeaderFragment")
                                 .add(R.id.mBody, new BodyFragment(), "BodyFragment")
-                                .add(R.id.mFooter, new FooterFragment(), "FooterFragment"));
+                                .add(R.id.mFooter, new FooterFragment(), "FooterFragment")
+                                .build());
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
                         throwable.printStackTrace();
-                        FragmentTransaction transaction =
-                                getSupportFragmentManager().beginTransaction();
-                        transaction.add(R.id.mHeader, new HeaderFragment(), "HeaderFragment")
-                                .add(R.id.mBody, new BodyFragment(), "BodyFragment")
-                                .add(R.id.mFooter, new FooterFragment(), "FooterFragment").commit();
                     }
                 });
+
+        try {
+            safeCommit(SupportFragmentTransactionBuilder.transaction(getSupportFragmentManager())
+                    .remove("HeaderFragment")
+                    .build());
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
 
         MaterialDialog dialog = new MaterialDialog.Builder(this).content("Test for dismiss").show();
         dialog.dismiss();

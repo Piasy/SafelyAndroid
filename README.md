@@ -1,7 +1,7 @@
 # SafelyAndroid
 [ ![Download](https://api.bintray.com/packages/piasy/maven/SafelyAndroid/images/download.svg) ](https://bintray.com/piasy/maven/SafelyAndroid/_latestVersion)
 
-Build safely Android app, no more Activity not found error and Activity state loss error!
+Build safely Android app, no more Activity not found, Activity state loss and Exception during fragment transaction!
 
 ## Pause-safe fragment transaction
 ![safely-android-demo.gif](art/safely-android-demo.gif)
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.piasy:safelyandroid:1.1.1'
+    compile 'com.github.piasy:safelyandroid:1.2.0'
 }
 ```
 
@@ -77,6 +77,10 @@ supportFragmentTransactionDelegate.safeCommit(transactionCommitter, transaction)
 supportFragmentTransactionDelegate.onResumed()
 ```
 
+### Build fragment transaction safely
+
+See `FragmentTransactionBuilder` and `SupportFragmentTransactionBuilder`.
+
 ### Just extends the safely base components
 We provide the default safely components, including `SafelyActivity`, `SafelyDialogFragment`,
 `SafelyFragment`, `SafelyAppCompatActivity`, `SafelySupportDialogFragment`, and
@@ -105,7 +109,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.piasy:safelyandroid-lint:1.1.1'
+    compile 'com.github.piasy:safelyandroid-lint:1.2.0'
 }
 ```
 
