@@ -1,7 +1,7 @@
 # SafelyAndroid
 [ ![Download](https://api.bintray.com/packages/piasy/maven/SafelyAndroid/images/download.svg) ](https://bintray.com/piasy/maven/SafelyAndroid/_latestVersion)
 
-Build safely Android app, no more Activity not found, Activity state loss and Exception during fragment transaction!
+Build safely Android app, no more Activity not found, Activity state loss and NPE during fragment transaction!
 
 ## Pause-safe fragment transaction
 ![safely-android-demo.gif](art/safely-android-demo.gif)
