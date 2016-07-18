@@ -30,8 +30,8 @@ ext {
     artifactName = 'SafelyAndroid'
     artifactDescription = 'Build safely Android app, no more Activity not found, Activity state loss and Exception during fragment transaction!'
     artifactLabels = ['activitynotfound', 'activitystateloss']
-    releaseVersionCode = 8
-    releaseVersionName = '1.2.0'
+    releaseVersionCode = 10
+    releaseVersionName = '1.2.3'
 
     androidCompileSdkVersion = 24
     androidBuildToolsVersion = '24.0.0'

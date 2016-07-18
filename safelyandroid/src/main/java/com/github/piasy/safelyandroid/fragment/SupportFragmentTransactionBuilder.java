@@ -26,6 +26,23 @@ public class SupportFragmentTransactionBuilder {
                 fragmentManager.beginTransaction());
     }
 
+    public SupportFragmentTransactionBuilder add(Fragment fragment, String tag)
+            throws IllegalArgumentException, IllegalStateException {
+        checkTag(tag);
+        checkTagNotExist(mFragmentManager, tag);
+        mTransaction.add(fragment, tag);
+        return this;
+    }
+
+    public SupportFragmentTransactionBuilder add(Fragment fragment, String tag, String name)
+            throws IllegalArgumentException, IllegalStateException {
+        checkTag(tag);
+        checkTag(name);
+        checkTagNotExist(mFragmentManager, tag);
+        mTransaction.add(fragment, tag).addToBackStack(name);
+        return this;
+    }
+
     public SupportFragmentTransactionBuilder add(@IdRes int id, Fragment fragment, String tag)
             throws IllegalArgumentException, IllegalStateException {
         checkId(id);
@@ -33,6 +50,17 @@ public class SupportFragmentTransactionBuilder {
         checkIdNotExist(mFragmentManager, id);
         checkTagNotExist(mFragmentManager, tag);
         mTransaction.add(id, fragment, tag);
+        return this;
+    }
+
+    public SupportFragmentTransactionBuilder add(@IdRes int id, Fragment fragment, String tag,
+            String name) throws IllegalArgumentException, IllegalStateException {
+        checkId(id);
+        checkTag(tag);
+        checkTag(name);
+        checkIdNotExist(mFragmentManager, id);
+        checkTagNotExist(mFragmentManager, tag);
+        mTransaction.add(id, fragment, tag).addToBackStack(name);
         return this;
     }
 
@@ -57,7 +85,10 @@ public class SupportFragmentTransactionBuilder {
         checkId(id);
         checkTag(tag);
         checkIdExist(mFragmentManager, id);
-        checkTagNotExist(mFragmentManager, tag);
+        Fragment old = mFragmentManager.findFragmentById(id);
+        if (!TextUtils.equals(old.getTag(), tag)) {
+            checkTagNotExist(mFragmentManager, tag);
+        }
         mTransaction.replace(id, fragment, tag);
         return this;
     }
