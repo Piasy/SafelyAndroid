@@ -1,5 +1,5 @@
 apply plugin: 'java'
-apply from: "${rootProject.rootDir}/bintray.gradle"
+apply from: "https://raw.githubusercontent.com/Piasy/BintrayUploadScript/master/bintray.gradle"
 
 // JDK 1.6 is required to support all versions of Android Studio.
 // See http://tools.android.com/build/studio.

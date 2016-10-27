@@ -8,12 +8,10 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.2'
+        classpath 'com.android.tools.build:gradle:2.2.2'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.3.1"
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.1"
         classpath "gradle.plugin.com.kageiit:lintrules:1.1.2"
     }
 }
@@ -26,16 +24,27 @@ allprojects {
 }
 
 ext {
+    userName = 'Piasy'
+    developer = [
+            id   : 'piasy',
+            name : 'piasy',
+            email: 'xz4215@gmail.com'
+    ]
+    license = [
+            id  : 'MIT',
+            name: 'The MIT License (MIT)',
+            url : 'http://opensource.org/licenses/MIT'
+    ]
     groupName = 'com.github.piasy'
     artifactName = 'SafelyAndroid'
     artifactDescription = 'Build safely Android app, no more Activity not found, Activity state loss and Exception during fragment transaction!'
     artifactLabels = ['activitynotfound', 'activitystateloss']
-    releaseVersionCode = 10
-    releaseVersionName = '1.2.3'
+    releaseVersionCode = 11
+    releaseVersionName = '1.2.4'
 
     androidCompileSdkVersion = 24
-    androidBuildToolsVersion = '24.0.0'
-    androidSupportSdkVersion = '24.0.0'
+    androidBuildToolsVersion = '24.0.3'
+    androidSupportSdkVersion = '24.2.1'
     minSdkVersion = 14
     targetSdkVersion = 24
 }
